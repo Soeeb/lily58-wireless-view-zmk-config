@@ -7,6 +7,8 @@
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/outputs.h>
+#include <dt-bindings/zmk/pointing.h>
 
 / {
     keymap {
@@ -22,52 +24,72 @@
 
             display-name = "Base";
             bindings = <
-&kp ESC    &kp N1  &kp N2  &kp N3    &kp N4    &kp N5                               &kp N6         &kp N7      &kp N8     &kp N9   &kp N0    &kp GRAVE
-&kp TAB    &kp Q   &kp W   &kp F     &kp P     &kp B                                &kp J          &kp L       &kp U      &kp Y    &kp SEMI  &kp MINUS
-&kp LCTRL  &kp A   &kp R   &kp S     &kp T     &kp G                                &kp M          &kp N       &kp E      &kp I    &kp O     &kp SQT
-&kp LSHFT  &kp Z   &kp X   &kp C     &kp D     &kp V      &kp LBKT     &kp RBKT     &kp K          &kp H       &kp COMMA  &kp DOT  &kp FSLH  &kp RSHFT
-                           &kp LALT  &kp LGUI  &kp SPACE  &lt 1 TAB    &lt 2 ENTER  &kp BACKSPACE  &kp DELETE  &kp RGUI
+&kp ESC    &kp N1  &kp N2  &kp N3    &kp N4        &kp N5                                 &kp N6           &kp N7        &kp N8     &kp N9   &kp N0    &kp GRAVE
+&kp TAB    &kp Q   &kp W   &kp F     &kp P         &kp B                                  &kp J            &kp L         &kp U      &kp Y    &kp SEMI  &kp MINUS
+&kp LCTRL  &kp A   &kp R   &kp S     &kp T         &kp G                                  &kp M            &kp N         &kp E      &kp I    &kp O     &kp SQT
+&kp LSHFT  &kp Z   &kp X   &kp C     &kp D         &kp V        &kp LBKT     &kp RBKT     &kp K            &kp H         &kp COMMA  &kp DOT  &kp FSLH  &kp RSHFT
+                           &kp LALT  &lt 3 ESCAPE  &lt 1 SPACE  &lt 2 TAB    &lt 5 ENTER  &lt 4 BACKSPACE  &lt 6 DELETE  &kp RGUI
             >;
         };
 
-        lower_layer {
-            // ------------------------------------------------------------------------------------------------------------
-            // | BTCLR | BT1 | BT2 |  BT3 |  BT4 |  BT5 |                   |      |       |       |      |       |       |
-            // |  F1   |  F2 |  F3 |  F4  |  F5  |  F6  |                   |  F7  |  F8   |  F9   |  F10 |  F11  |  F12  |
-            // |   `   |  !  |  @  |  #   |  $   |  %   |                   |  ^   |  &    |  *    |  (   |   )   |   ~   |
-            // |       |     |     |      |      |      |        |  |       |      |  _    |  +    |  {   |   }   |  "|"  |
-            //                     |      |      |      |        |  |       |      |       |       |
-
-            display-name = "Lower";
+        nav {
             bindings = <
-&bt BT_CLR  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4                    &trans     &trans     &trans           &trans    &trans    &trans
-&kp F1      &kp F2        &kp F3        &kp F4        &kp F5        &kp F6                          &kp F7     &kp F8     &kp F9           &kp F10   &kp F11   &kp F12
-&kp GRAVE   &kp EXCL      &kp AT        &kp HASH      &kp DOLLAR    &kp PRCNT                       &kp CARET  &kp AMPS   &kp KP_MULTIPLY  &kp LPAR  &kp RPAR  &kp TILDE
-&trans      &trans        &trans        &trans        &trans        &trans        &trans    &trans  &trans     &kp MINUS  &kp KP_PLUS      &kp LBRC  &kp RBRC  &kp PIPE
-                                        &trans        &trans        &trans        &trans    &trans  &trans     &trans     &trans
+&none  &none         &none     &none      &none      &none                      &none       &none           &none           &none         &none            &none
+&none  &none         &none     &none      &none      &none                      &kp LC(Y)   &kp LC(V)       &kp LC(C)       &kp LC(X)     &kp LC(Z)        &none
+&none  &kp LEFT_WIN  &kp LALT  &kp LCTRL  &kp LSHFT  &none                      &kp CAPS    &kp LEFT_ARROW  &kp DOWN_ARROW  &kp UP_ARROW  &kp RIGHT_ARROW  &none
+&none  &none         &none     &none      &none      &none  &none    &none      &kp INSERT  &kp HOME        &kp PAGE_DOWN   &kp PAGE_UP   &kp END          &none
+                               &none      &none      &none  &none    &kp ENTER  &kp BSPC    &kp DELETE      &none
             >;
-
-            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
         };
 
-        raise_layer {
-            // ------------------------------------------------------------------------------------------------------------
-            // |       |     |     |      |      |      |                   |      |       |       |      |       |       |
-            // |   `   |  1  |  2  |  3   |  4   |  5   |                   |  6   |   7   |   8   |  9   |   0   |       |
-            // |   F1  |  F2 |  F3 |  F4  |  F5  |  F6  |                   |      |   <-  |   v   |  ^   |  ->   |       |
-            // |   F7  |  F8 |  F9 |  F10 |  F11 |  F12 |        |  |       |  +   |   -   |   =   |  [   |   ]   |   \   |
-            //                     |      |      |      |        |  |       |      |       |       |
-
-            display-name = "Raise";
+        mouse {
             bindings = <
-&trans     &trans  &trans  &trans   &trans   &trans                     &trans       &trans     &trans     &trans    &trans     &trans
-&kp GRAVE  &kp N1  &kp N2  &kp N3   &kp N4   &kp N5                     &kp N6       &kp N7     &kp N8     &kp N9    &kp N0     &trans
-&kp F1     &kp F2  &kp F3  &kp F4   &kp F5   &kp F6                     &trans       &kp LEFT   &kp DOWN   &kp UP    &kp RIGHT  &trans
-&kp F7     &kp F8  &kp F9  &kp F10  &kp F11  &kp F12  &trans    &trans  &kp KP_PLUS  &kp MINUS  &kp EQUAL  &kp LBKT  &kp RBKT   &kp BSLH
-                           &trans   &trans   &trans   &trans    &trans  &trans       &trans     &trans
+&none  &none         &none     &none      &none      &none                     &none      &none           &none           &none           &none            &none
+&none  &none         &none     &none      &none      &none                     &kp LC(Y)  &kp LC(V)       &kp LC(C)       &kp LC(X)       &kp LC(Z)        &none
+&none  &kp LEFT_WIN  &kp LALT  &kp LCTRL  &kp LSHFT  &none                     &none      &mmv MOVE_LEFT  &mmv MOVE_DOWN  &mmv MOVE_DOWN  &mmv MOVE_DOWN   &none
+&none  &none         &none     &none      &none      &none  &none    &none     &none      &msc SCRL_LEFT  &msc SCRL_DOWN  &msc SCRL_UP    &msc SCRL_RIGHT  &none
+                               &none      &none      &none  &none    &mkp MB2  &mkp MB1   &mkp MB3        &none
             >;
+        };
 
-            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
+        media {
+            bindings = <
+&none  &none         &none     &none      &none      &none                      &none         &none         &none              &none            &none         &none
+&none  &none         &none     &none      &none      &none                      &none         &none         &none              &none            &none         &none
+&none  &kp LEFT_WIN  &kp LALT  &kp LCTRL  &kp LSHFT  &none                      &none         &none         &kp C_VOLUME_DOWN  &kp C_VOLUME_UP  &none         &none
+&none  &none         &none     &none      &none      &none  &none    &none      &out OUT_TOG  &bt BT_SEL 0  &bt BT_SEL 1       &bt BT_SEL 2     &bt BT_SEL 3  &none
+                               &none      &none      &none  &none    &kp ENTER  &kp BSPC      &kp DELETE    &none
+            >;
+        };
+
+        num {
+            bindings = <
+&none  &none      &none   &none   &none       &none                              &none  &none            &none      &none          &none          &none
+&none  &kp LBKT   &kp N7  &kp N8  &kp N9      &kp RBKT                           &none  &none            &none      &none          &none          &none
+&none  &kp SEMI   &kp N4  &kp N5  &kp N6      &kp EQUAL                          &none  &kp RIGHT_SHIFT  &kp RCTRL  &kp RIGHT_ALT  &kp RIGHT_GUI  &none
+&none  &kp GRAVE  &kp N1  &kp N2  &kp N3      &kp BACKSLASH  &none        &none  &none  &none            &none      &none          &none          &none
+                          &none   &kp PERIOD  &kp N0         &kp MINUS    &none  &none  &none            &none
+            >;
+        };
+
+        sym {
+            bindings = <
+&none  &none           &none          &none        &none                 &none                                      &none  &none            &none      &none          &none          &none
+&none  &kp LEFT_BRACE  &kp AMPERSAND  &kp STAR     &kp LEFT_PARENTHESIS  &kp RIGHT_BRACE                            &none  &none            &none      &none          &none          &none
+&none  &kp COLON       &kp DOLLAR     &kp PERCENT  &kp CARET             &kp PLUS                                   &none  &kp RIGHT_SHIFT  &kp RCTRL  &kp RIGHT_ALT  &kp RIGHT_GUI  &none
+&none  &kp TILDE       &kp EXCL       &kp AT       &kp HASH              &kp PIPE               &none        &none  &none  &none            &none      &none          &none          &none
+                                      &none        &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS  &kp UNDER    &none  &none  &none            &none
+            >;
+        };
+
+        fun {
+            bindings = <
+&none  &none    &none   &none   &none                 &none                                      &none  &none            &none      &none          &none          &none
+&none  &kp F12  &kp F7  &kp F8  &kp F9                &kp PRINTSCREEN                            &none  &none            &none      &none          &none          &none
+&none  &kp F11  &kp F4  &kp F5  &kp F6                &kp SCROLLLOCK                             &none  &kp RIGHT_SHIFT  &kp RCTRL  &kp RIGHT_ALT  &kp RIGHT_GUI  &none
+&none  &kp F10  &kp F1  &kp F2  &kp F3                &kp PAUSE_BREAK        &none        &none  &none  &none            &none      &none          &none          &none
+                        &none   &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS  &kp UNDER    &none  &none  &none            &none
+            >;
         };
     };
 };
